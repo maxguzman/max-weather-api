@@ -1,5 +1,3 @@
-import PerfectLib
-
 class Weather {
   static func getCurrent(_ location: String = "Chile/Providencia") -> String {
     
@@ -7,9 +5,9 @@ class Weather {
     let current_observation = data["current_observation"] as! [String: Any]
     var trimmedData = [String:Any]()
     
-    trimmedData["observation_time"]    = current_observation["observation_time"]
-    trimmedData["weather"]        = current_observation["weather"]
-    trimmedData["temperature_string"]  = current_observation["temperature_string"]
+    trimmedData["observation_time"]   = current_observation["observation_time"]
+    trimmedData["weather"]            = current_observation["weather"]
+    trimmedData["temperature_string"] = current_observation["temperature_string"]
     
     do {
       return try trimmedData.jsonEncodedString()

@@ -1,5 +1,3 @@
-import PerfectLib
-import PerfectCURL
 import PerfectHTTP
 import PerfectHTTPServer
 
@@ -9,7 +7,7 @@ let apiToken = "c993087e2e79564d"
 
 var routes = Routes()
 
-routes.add(method: .get, uris: ["\(apiRoute)current/","\(apiRoute)current/{country}/{city}"], handler: {
+routes.add(method: .get, uris: ["\(apiRoute)current","\(apiRoute)current/{country}/{city}"], handler: {
   request, response in
   let country = request.urlVariables["country"] ?? "Chile"
   let city = request.urlVariables["city"] ?? "Providencia"
@@ -27,6 +25,12 @@ routes.add(method: .get, uris: ["\(apiRoute)forecast","\(apiRoute)forecast/{coun
   response.setHeader(.contentType, value: "application/json")
   response.appendBody(string: Weather.getForecast("\(country)/\(city)"))
   response.completed()
+})
+
+routes.add(method: .get, uri: "/_ah/health", handler: { request, response in
+    print("GET - /_ah/health route handler...")
+    response.setBody(string: "OK")
+    response.completed()
 })
 
 do {
